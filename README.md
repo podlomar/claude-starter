@@ -34,34 +34,10 @@ Subagent configurations and additional skills will be added here as the template
 
 Drop a new folder under `.claude/skills/<name>/` containing a `SKILL.md` file. Claude Code picks it up automatically — no registration needed.
 
-Skill frontmatter reference:
+## Permissions
 
-```yaml
----
-name: skill-name
-description: >
-  When to invoke this skill.
-allowed-tools:
-  - Bash(git status:*)
-argument-hint: "[optional args]"
----
-```
+[`.claude/settings.json`](.claude/settings.json) pre-configures safe defaults:
 
-## Commit format
-
-All commits in projects using this template follow:
-
-```
-<emoji> <type>: <message>
-```
-
-Examples:
-
-```
-✨ feat: add user authentication
-🐛 fix: handle empty response from API
-♻️ refactor: extract validation into helper
-🔧 chore: upgrade dependencies
-```
-
-See [.claude/skills/commit/SKILL.md](.claude/skills/commit/SKILL.md) for the full type→emoji map and edge case handling.
+- **Allow** — read-only operations, git inspection, `npm run`, `gh pr/issue view/list/status`
+- **Ask** — `git push/pull/merge/rebase`, `gh pr create/merge`, `gh issue create/close`, `env`/`set`
+- **Deny** — `rm -rf`, `git push --force`, `sudo`, SSH/SCP, secrets files (`.env`, `*.key`, `*.pem`, …)
