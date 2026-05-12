@@ -26,6 +26,18 @@ const validate = (x: string): void => { if (!x) return; }
 const validate = (x: string): void => { if (!x) return undefined; }
 ```
 
+## Async
+
+When calling a function that returns a promise without awaiting it, use `void` to make the intent explicit.
+
+```ts
+// ✅
+void analytics.track("page_view");
+
+// ❌
+analytics.track("page_view");
+```
+
 ## Comments
 
 Default to no comments. Only add one when the **why** is non-obvious — a hidden constraint, a workaround for a specific bug, or behaviour that would surprise a reader. Well-named identifiers make the what self-evident; comments explain what they cannot.
