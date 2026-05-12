@@ -34,6 +34,15 @@ Subagent configurations and additional skills will be added here as the template
 
 Drop a new folder under `.claude/skills/<name>/` containing a `SKILL.md` file. Claude Code picks it up automatically — no registration needed.
 
+## Templates
+
+Ready-to-copy config files in [`templates/`](templates/):
+
+| File | Description |
+|------|-------------|
+| `biome.json` | Biome formatter + linter with recommended rules and JS style guide alignment |
+| `tsconfig.json` | Strict TypeScript config including `noImplicitReturns` and `noUncheckedIndexedAccess` |
+
 ## Permissions
 
 [`.claude/settings.json`](.claude/settings.json) pre-configures safe defaults:
