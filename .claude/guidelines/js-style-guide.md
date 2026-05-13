@@ -79,6 +79,58 @@ const port = config.port || 3000;
 const label = user.name || "Anonymous";
 ```
 
+## Unknown over any
+
+Use `unknown` instead of `any` when the type is genuinely not known. `any` silences the type checker entirely; `unknown` forces you to narrow the type before use.
+
+```ts
+// ✅
+const parse = (input: unknown): User => {
+  if (!isUser(input)) throw new Error("invalid input");
+  return input;
+}
+
+// ❌
+const parse = (input: any): User => {
+  return input;
+}
+```
+
+## Nested ternaries
+
+Do not nest ternaries. Use `if/else` or extract the logic into a named variable or function.
+
+```ts
+// ✅
+const getLabel = (status: Status): string => {
+  if (status === "active") {
+    return "Active";
+  }
+  
+  if (status === "pending") {
+    return "Pending";
+  }
+  
+  return "Inactive";
+}
+
+// ❌
+const label = status === "active" ? "Active" : status === "pending" ? "Pending" : "Inactive";
+```
+
+## Exports
+
+Use named exports only. Default exports make refactoring and IDE rename support harder.
+
+```ts
+// ✅
+export const UserCard = () => { ... }
+export const formatDate = (date: Date): string => { ... }
+
+// ❌
+export default function UserCard() { ... }
+```
+
 ## Linting suppressions
 
 Do not disable linting rules without an explanation comment.

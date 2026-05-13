@@ -55,7 +55,9 @@ A function should do one thing. If the body needs comments to explain its sectio
 const validateForm = (form: Form): ValidationResult => { ... }
 const submitForm = async (form: Form): Promise<void> => {
   const result = validateForm(form);
-  if (result.valid !== true) return;
+  if (result.valid !== true) {
+    return;
+  }
   await api.submit(form);
 }
 
@@ -83,6 +85,34 @@ if (attempts > 3) { ... }
 setTimeout(callback, 5000);
 ```
 
+## Early returns
+
+Return early on invalid or edge-case conditions at the top of a function rather than wrapping the main logic in nested branches.
+
+```ts
+// ✅
+const processOrder = (order: Order): void => {
+  if (order.items.length === 0) {
+    return;
+  }
+
+  if (order.status !== "pending") {
+    return;
+  }
+
+  // main logic
+}
+
+// ❌
+const processOrder = (order: Order): void => {
+  if (order.items.length > 0) {
+    if (order.status === "pending") {
+      // main logic
+    }
+  }
+}
+```
+
 ## Error handling
 
 Only validate and handle errors at system boundaries — user input and external APIs. Trust internal code and framework guarantees; don't add defensive checks for states that cannot occur.
@@ -96,7 +126,9 @@ const handler = (req: Request): Response => {
 
 // ❌ — redundant guard inside trusted internal code
 const processEmail = (email: string): void => {
-  if (email === undefined) throw new Error("email required");
+  if (email === undefined) {
+    throw new Error("email required");
+  }
   ...
 }
 ```
