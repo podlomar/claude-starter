@@ -17,7 +17,7 @@ function getUser(id: number): User { ... }
 const getUser = function(id: number): User { ... }
 ```
 
-All functions must have an explicit return type annotation.
+All functions must have an explicit return type annotation. Biome's `useExplicitType` rule covers this but is currently in nursery — add it to `biome.json` once it stabilizes.
 
 ```ts
 // ✅
@@ -27,7 +27,7 @@ const getUser = (id: number): User => { ... }
 const getUser = (id: number) => { ... }
 ```
 
-No explicit `return undefined` — use a bare `return` or omit it entirely.
+No explicit `return undefined` — use a bare `return` or omit it entirely. Enforced by Biome's `noUselessUndefined`.
 
 ```ts
 // ✅
@@ -39,7 +39,7 @@ const validate = (x: string): void => { if (!x) return undefined; }
 
 ## Async
 
-When calling a function that returns a promise without awaiting it, use `void` to make the intent explicit.
+When calling a function that returns a promise without awaiting it, use `void` to make the intent explicit. Biome's `noFloatingPromises` rule covers this but is currently in nursery — add it to `biome.json` once it stabilizes.
 
 ```ts
 // ✅
@@ -63,6 +63,20 @@ if (isActive === true) { ... }
 if (value) { ... }
 if (list.length) { ... }
 if (isActive) { ... }
+```
+
+## Nullish coalescing
+
+Use `??` instead of `||` for default values. `||` triggers on any falsy value (`0`, `""`, `false`), which is rarely the intent. Biome's `useNullishCoalescing` rule covers this but is currently in nursery — add it to `biome.json` once it stabilizes.
+
+```ts
+// ✅
+const port = config.port ?? 3000;
+const label = user.name ?? "Anonymous";
+
+// ❌
+const port = config.port || 3000;
+const label = user.name || "Anonymous";
 ```
 
 ## Linting suppressions
