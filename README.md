@@ -20,7 +20,9 @@ A personal template for new coding projects — pre-configured with Claude Code 
 
 | File | Description |
 |------|-------------|
-| [js-style-guide.md](.claude/guidelines/js-style-guide.md) | Comments, functions, React state, linting suppressions |
+| [coding-guide.md](.claude/guidelines/coding-guide.md) | Language-independent rules: comments |
+| [js-style-guide.md](.claude/guidelines/js-style-guide.md) | JS/TS rules: functions, async, boolean expressions, linting suppressions |
+| [react-style-guide.md](.claude/guidelines/react-style-guide.md) | React rules: state management |
 
 **Templates** — copy into new projects as needed:
 
