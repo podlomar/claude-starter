@@ -6,6 +6,17 @@ Rules below are **not** enforced by the linter or compiler and must be followed 
 
 ## Functions
 
+Always use arrow functions instead of function declarations or expressions.
+
+```ts
+// ✅
+const getUser = (id: number): User => { ... }
+
+// ❌
+function getUser(id: number): User { ... }
+const getUser = function(id: number): User { ... }
+```
+
 All functions must have an explicit return type annotation.
 
 ```ts
